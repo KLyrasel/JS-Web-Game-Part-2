@@ -10,10 +10,16 @@ function newImage(url, left, bottom){
 
 function newItem(url, left, bottom){
     let item = newImage(url, left, bottom)
+    item.addEventListener('click',function() {
+        item.remove()
+        let inventoryItem = document.createElement('img')
+        inventoryItem.src = url
+        inventory.append (inventoryItem)
+    } )
 }
 
 function newInventory(){
-    let inventory = document.createElement('div')
+    var inventory = document.createElement('div')
     inventory.style.position = 'fixed'
     inventory.style.bottom = '0px';
     inventory.style.left = '0px'
@@ -26,6 +32,7 @@ function newInventory(){
     inventory.style.border = '2px solid black'
     inventory.style.backgroundColor = 'brown'
     document.body.append(inventory)
+    return inventory;
 }
 
 newInventory()
@@ -39,3 +46,52 @@ newImage('assets/well.png', 500, 575)
 newItem('assets/sword.png', 500, 555)
 newItem('assets/shield.png', 165, 335)
 newItem('assets/staff.png', 600, 250)
+
+const character = newImage ('assets/green-character/static.gif')
+let direction = null;
+let x = 100;
+let y = 250;
+
+function moveCharacter(){
+if (direction === 'west') { 
+    x=x-1
+}
+
+if (direction === 'north') { 
+    y=y+1
+}
+
+if(direction === 'east') {
+    x=x+1
+}
+
+if(direction === 'south'){
+    y=y-1
+}
+
+character.style.left = x +'px'
+character.style.bottom = y + 'px'
+}
+
+setInterval (moveCharacter, 1)
+
+document.addEventListener('keydown', function(e) {    
+    if(e.repeat) return;
+
+    if(e.key === 'ArrowLeft'){
+        direction = 'west'
+    }
+    if(e.key === 'ArrowUp'){
+        direction = 'north'
+    }
+    if(e.key === 'ArrowRight'){
+        direction = 'east'
+    }
+    if(e.key === 'ArrowDown'){
+        direction = 'south'
+    }
+})
+
+document.addEventListener('keyup', function(e){
+    direction = null
+})
