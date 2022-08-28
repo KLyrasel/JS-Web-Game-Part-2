@@ -49,7 +49,7 @@ newItem('assets/staff.png', 600, 250)
 
 const character = newImage('assets/green-character/static.gif')
 
-function handleDirectionChange(){
+function handleDirectionChange(direction) {
 if(direction === null){
     character.src = 'assets/green-character/static.gif'
 }
@@ -60,7 +60,7 @@ if(direction === 'north'){
     character.src = 'assets/green-character/north.gif'
 }
 if(direction === 'east'){
-    character.src = 'assets/green-character/east.gif'
+    character.src = 'assets/green-character/east.gif '
 }
 if(direction === 'south'){
     character.src = 'assets/green-character/south.gif'
@@ -68,11 +68,6 @@ if(direction === 'south'){
 }
 move(character).withArrowKeys(100, 250, handleDirectionChange)
 
-function moveWithArrowKeys(left,bottom,callback){
-    let direction = null;
-    let x = left;
-    let y = bottom;
-}
 
 function moveCharacter(){
 if (direction === 'west') { 
@@ -97,6 +92,11 @@ character.style.bottom = y + 'px'
 
 setInterval (moveCharacter, 1)
 
+function moveWithArrowKeys(left,bottom,callback) {
+    let direction = null;
+    let x = left;
+    let y = bottom;
+
 document.addEventListener('keydown', function(e) {    
     if(e.repeat) return;
 
@@ -120,6 +120,8 @@ document.addEventListener('keyup', function(e){
     callback(direction)
 })
 
+}
+
 function move(element) {
     element.style.position = 'fixed'
 
@@ -128,7 +130,7 @@ function move(element) {
         element.style.bottom = bottom + 'px'
     }
 
-    function moveWithArrowKeys(left, bottom){
+    function moveWithArrowKeys(left, bottom) {
         let direction = null;
         let x = left;
         let y = bottom;
@@ -136,7 +138,7 @@ function move(element) {
         element.style.left = x + 'px'
         element.style.bottom = y + 'px'
         
-        function moveCharacter(){ 
+        function moveCharacter() { 
             if(direction === 'west'){
                 x-=1
             }
@@ -155,7 +157,7 @@ function move(element) {
         
         setInterval(moveCharacter, 1)
         
-        document.addEventListener('keydown', function(e){
+        document.addEventListener('keydown', function(e) {
             if(e.repeat) return;
         
             if(e.key === 'ArrowLeft'){
@@ -172,7 +174,7 @@ function move(element) {
             }
         })
         
-        document.addEventListener('keyup', function(e){
+        document.addEventListener('keyup', function(e) {
             direction = null
         })
     }
